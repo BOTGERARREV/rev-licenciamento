@@ -91,6 +91,52 @@ def validar():
         return jsonify({"status": "fail", "message": "Chave já usada em outra máquina."})
 
     return jsonify({"status": "ok", "message": "Licença válida e ativa!"})
+    
+@app.errorhandler(405)
+def metodo_nao_permitido(e):
+    return """
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <title>Método não permitido</title>
+        <style>
+            body {
+                background-color: #121212;
+                color: #ffffff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                font-family: Arial, sans-serif;
+            }
+            .box {
+                text-align: center;
+                background-color: #1e1e1e;
+                padding: 40px;
+                border-radius: 12px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            }
+            .box h1 {
+                color: #ff5555;
+                font-size: 32px;
+                margin-bottom: 10px;
+            }
+            .box p {
+                color: #cccccc;
+                font-size: 16px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <h1>405 - Método não permitido</h1>
+            <p>Esta rota só aceita requisições do tipo POST via API.</p>
+        </div>
+    </body>
+    </html>
+    """, 405
+
 
 if __name__ == "__main__":
     import os
