@@ -1,4 +1,3 @@
-
 from flask import Flask, request, jsonify
 from datetime import datetime
 import json
@@ -22,7 +21,42 @@ def salvar_chaves(chaves):
 
 @app.route("/")
 def index():
-    return "Servidor de Licenciamento Online - REV Infinity"
+    return """
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Licenciamento - REV Infinity</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body {
+                background-color: #121212;
+                color: #ffffff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                font-family: Arial, sans-serif;
+            }
+            .card {
+                background-color: #1e1e1e;
+                padding: 40px;
+                border-radius: 15px;
+                box-shadow: 0 0 15px rgba(0,0,0,0.5);
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="card">
+            <h2>🔐 Servidor de Licenciamento - REV Infinity</h2>
+            <p>API ativa e escutando validações de chave.</p>
+            <p style="font-size: 0.9em; color: #aaaaaa;">Use POST /validar para verificar chaves de ativação.</p>
+        </div>
+    </body>
+    </html>
+    """
 
 @app.route("/validar", methods=["POST"])
 def validar():
@@ -51,4 +85,6 @@ def validar():
     return jsonify({"status": "ok", "message": "Licença válida e ativa!"})
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
