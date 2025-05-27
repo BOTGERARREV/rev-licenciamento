@@ -45,6 +45,13 @@ def index():
                 border-radius: 15px;
                 box-shadow: 0 0 15px rgba(0,0,0,0.5);
                 text-align: center;
+                color: #ffffff;
+            }
+            .card h2 {
+                color: #ffffff;
+            }
+            .card p {
+                color: #ffffff;
             }
         </style>
     </head>
@@ -52,11 +59,10 @@ def index():
         <div class="card">
             <h2>🔐 Servidor de Licenciamento - REV Infinity</h2>
             <p>API ativa e escutando validações de chave.</p>
-            <p style="font-size: 0.9em; color: #aaaaaa;">Use POST /validar para verificar chaves de ativação.</p>
+            <p style="font-size: 0.9em;">Use POST <code>/validar</code> para verificar chaves de ativação.</p>
         </div>
     </body>
     </html>
-    """
 
 @app.route("/validar", methods=["POST"])
 def validar():
